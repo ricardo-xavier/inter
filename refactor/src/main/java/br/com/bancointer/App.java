@@ -54,9 +54,8 @@ public class App {
                     if (split.length == 3) {
                         String component = componentsMap.get(split[1]);
                         String replace = reader.readLine();
-                        split = component.split("\\.");
                         line = replace.replace(";", " = new "
-                            + split[split.length-1] + "();");
+                            + component + "();");
                     } else {
                         writer.println("@Autowired");
                         writer.println(line);
@@ -66,14 +65,12 @@ public class App {
                 }
             }
 
-            writer.println(line);
-            if (line.startsWith("package")) {
-                writer.println();
-                for (String qualifier : qualifiers) {
-                    String component = componentsMap.get(qualifier);
-                    writer.println("import " + component + ";");
-                }
+            //FIXME
+            if (line.contains("Feliz")) {
+                line = line.replace("Feliz", "FELIZ");
             }
+
+            writer.println(line);
         }
 
         writer.close();
